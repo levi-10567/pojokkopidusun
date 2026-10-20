@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pojok Kopi Dusun – Prototipe</title>
+<style>
+:root{--bg:#f2f4ef;--card:#fff;--tx:#1d2a24;--mu:#66756d;--ac:#1f5c45;--acx:#fff;--hi:#c98a12;--bd:#d9e0d7;--rd:#b3372c;--ok:#2e7d4f;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a16;--card:#1b261f;--tx:#e9f0ea;--mu:#9bab9f;--ac:#5fc29a;--acx:#0f1a14;--hi:#e3ae45;--bd:#2c3a31;--rd:#ef7f73;--ok:#6cc08b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121a16;--card:#1b261f;--tx:#e9f0ea;--mu:#9bab9f;--ac:#5fc29a;--acx:#0f1a14;--hi:#e3ae45;--bd:#2c3a31;--rd:#ef7f73;--ok:#6cc08b;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:16px}
+h1{font:700 26px/1.2 Georgia,"Times New Roman",serif;margin:0}
+h2{font:700 18px/1.3 Georgia,serif;margin:22px 0 10px}
+.mu{color:var(--mu);font-size:14px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.demo{background:var(--card);border:1px dashed var(--hi);border-radius:8px;padding:8px 12px;font-size:13px;margin:12px 0;color:var(--mu)}
+nav{display:flex;gap:6px;margin:14px 0;border-bottom:2px solid var(--bd)}
+nav button{flex:1;background:none;border:0;padding:10px 6px;font:600 15px inherit;font-family:inherit;color:var(--mu);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+nav button.on{color:var(--ac);border-color:var(--ac)}
+button{font-family:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px}
+.item{display:flex;align-items:center;gap:10px}.item>div:nth-child(2){flex:1}
+.em{font-size:28px}
+.qty{display:flex;align-items:center;gap:8px}.qty span{min-width:18px;text-align:center;font-weight:700}
+.qty button{width:32px;height:32px;border-radius:50%;border:1px solid var(--ac);background:none;color:var(--ac);font-size:18px;cursor:pointer}
+label.f{display:block;margin:10px 0;font-size:14px;color:var(--mu)}
+input[type=text],select{display:block;width:100%;margin-top:4px;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.opt{display:flex;gap:10px;align-items:center;border:1.5px solid var(--bd);border-radius:10px;padding:10px;margin:8px 0;cursor:pointer}
+.opt.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 8%,transparent)}
+.opt span{margin-left:auto;font-weight:700}
+.row{display:flex;justify-content:space-between;gap:8px;padding:3px 0}
+.row.t{border-top:1px solid var(--bd);margin-top:6px;padding-top:8px;font-weight:700;font-size:18px}
+.btn{width:100%;background:var(--ac);color:var(--acx);border:0;border-radius:10px;padding:13px;font:700 16px inherit;font-family:inherit;cursor:pointer;margin-top:10px}
+.btn.s{width:auto;padding:8px 14px;font-size:14px;margin:0}
+.btn.g{background:none;color:var(--rd);border:1px solid var(--rd)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.err{color:var(--rd);font-size:14px;margin-top:8px}
+.ticket{border:2px solid var(--ac);border-radius:14px;padding:16px;background:var(--card);margin-top:14px}
+.ticket .no{font:700 28px/1.1 Georgia,serif;color:var(--ac);letter-spacing:.5px;word-break:break-all}
+.badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:700;background:var(--bd);color:var(--tx)}
+.badge.Diproses{background:var(--hi);color:#1d1400}.badge.Siap{background:var(--ok);color:#fff}.badge.Selesai{background:var(--ac);color:var(--acx)}.badge.Dibatalkan{background:var(--rd);color:#fff}
+.ord{margin:10px 0}.ord .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.ord .id{font:700 15px Georgia,serif}.acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stats b{display:block;font:700 22px Georgia,serif;color:var(--ac)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--bd)}
+.sc{overflow-x:auto}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90%;z-index:5}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<main>
+<header>
+ <div><h1>Pojok Kopi Dusun</h1><div class="mu">Prototipe pemesanan mandiri dan antrean</div></div>
+ <button class="btn s g" onclick="resetDemo()">Ulangi demo</button>
+</header>
+<div class="demo">Ini contoh tampilan untuk diskusi. Data hanya tersimpan sementara di halaman ini dan hilang saat dimuat ulang. Versi sebenarnya memakai Laravel dan database.</div>
+<nav id="nav"></nav>
+<div id="v"></div>
+</main>
+<div id="toast"></div>
+<script>
+const MENU=[
+{id:1,n:'Kopi susu',p:15000,e:'☕'},{id:2,n:'Americano',p:12000,e:'🫖'},{id:3,n:'Latte',p:18000,e:'🥛'},{id:4,n:'Teh tarik',p:12000,e:'🍵'},
+{id:5,n:'Es teh manis',p:8000,e:'🧊'},{id:6,n:'Roti bakar',p:14000,e:'🍞'},{id:7,n:'Pisang goreng',p:12000,e:'🍌'},{id:8,n:'Mie goreng',p:16000,e:'🍜'}];
+const WAITERS=['Andi','Sari','Budi'],FEE=3000;
+const TABS=[['cust','Pelanggan'],['staff','Pelayan'],['admin','Admin']];
+let S;
+const rp=n=>'Rp'+n.toLocaleString('id-ID');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const m=id=>MENU.find(x=>x.id==id);
+const sub=o=>o.items.reduce((a,i)=>a+m(i.id).p*i.q,0);
+const code=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');return 'PKD-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+Array.from({length:6},()=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.random()*32|0]).join('')};
+const mk=(name,note,items,h,loc)=>({id:code(),name,note,items,h,loc,fee:h==='antar'?FEE:0,st:'Menunggu',w:null});
+function init(){S={tab:'cust',cart:{},orders:[],me:null,w:'Andi',h:'ambil',name:'',note:'',loc:'',err:''};
+ S.orders.push(mk('Rina','gula sedikit',[{id:1,q:2},{id:6,q:1}],'antar','baju merah, dekat jendela'));
+ S.orders.push(mk('Pak Joko','',[{id:2,q:1},{id:7,q:1}],'ambil',''));}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.className='on';clearTimeout(toast.t);toast.t=setTimeout(()=>e.className='',2600)}
+function resetDemo(){init();render()}
+function go(t){S.tab=t;render()}
+function chg(id,d){S.cart[id]=Math.max(0,(S.cart[id]||0)+d);render()}
+function setH(h){S.h=h;render()}
+function place(){
+ const items=Object.entries(S.cart).filter(([,q])=>q>0).map(([id,q])=>({id:+id,q}));
+ if(!items.length)return S.err='Pilih minimal satu menu.',render();
+ if(!S.name.trim())return S.err='Isi nama Anda.',render();
+ if(S.h==='antar'&&!S.loc.trim())return S.err='Isi ciri-ciri atau lokasi duduk agar pelayan bisa menemukan Anda.',render();
+ const o=mk(S.name.trim(),S.note.trim(),items,S.h,S.loc.trim());
+ S.orders.push(o);S.me=o.id;S.cart={};S.err='';S.note='';render();toast('Pesanan dibuat: '+o.id);
+}
+function act(id,a){
+ const o=S.orders.find(x=>x.id===id);if(!o)return;
+ if(a==='terima'){if(o.w)return toast('Pesanan sudah diterima '+o.w+'.'),render();o.w=S.w;o.st='Diproses'}
+ else if(o.w&&o.w!==S.w)return toast('Pesanan ini ditangani '+o.w+'.');
+ else if(a==='siap')o.st='Siap diambil';
+ else if(a==='selesai')o.st='Selesai';
+ else if(a==='batal')o.st='Dibatalkan';
+ render();
+}
+const cls=s=>s.split(' ')[0];
+const badge=s=>`<span class="badge ${cls(s)}">${s}</span>`;
+const hLabel=o=>o.h==='antar'?'Diantar pelayan (+'+rp(o.fee)+')':'Ambil sendiri di loket';
+function ticket(o){
+ const msg={Menunggu:'Pesanan diterima dan menunggu giliran.',Diproses:'Pesanan sedang dibuat'+(o.w?' oleh '+esc(o.w):'')+'.',
+ 'Siap diambil':o.h==='antar'?'Pesanan siap. '+esc(o.w||'Pelayan')+' akan mengantar ke tempat Anda.':'Pesanan siap. Ambil di loket dengan menunjukkan nomor ini.',
+ Selesai:'Pesanan sudah diterima. Terima kasih!',Dibatalkan:'Pesanan dibatalkan.'}[o.st];
+ return `<div class="ticket"><div class="mu">Nomor pesanan Anda</div><div class="no">${o.id}</div><div style="margin:8px 0">${badge(o.st)}</div><div>${msg}</div><div class="mu" style="margin-top:6px">Bayar di kasir · ${hLabel(o)}</div></div>`;
+}
+function vCust(){
+ const mine=S.orders.find(o=>o.id===S.me);
+ const lines=Object.entries(S.cart).filter(([,q])=>q>0);
+ const sb=lines.reduce((a,[id,q])=>a+m(id).p*q,0),fee=S.h==='antar'?FEE:0;
+ let h=mine?ticket(mine):'';
+ h+='<h2>Pilih menu</h2><div class="grid">'+MENU.map(x=>`<div class="card item"><div class="em">${x.e}</div><div><b>${x.n}</b><div class="mu">${rp(x.p)}</div></div><div class="qty"><button aria-label="Kurangi ${x.n}" onclick="chg(${x.id},-1)">−</button><span>${S.cart[x.id]||0}</span><button aria-label="Tambah ${x.n}" onclick="chg(${x.id},1)">+</button></div></div>`).join('')+'</div>';
+ h+='<h2>Checkout</h2><div class="card">';
+ h+=lines.length?lines.map(([id,q])=>`<div class="row"><span>${q} × ${m(id).n}</span><span>${rp(m(id).p*q)}</span></div>`).join(''):'<div class="mu">Keranjang masih kosong. Tambahkan menu di atas.</div>';
+ h+=`<label class="f">Nama<input type="text" value="${esc(S.name)}" oninput="S.name=this.value"></label>
+ <label class="f">Catatan (opsional)<input type="text" placeholder="Contoh: gula sedikit" value="${esc(S.note)}" oninput="S.note=this.value"></label>
+ <div class="mu">Cara menerima pesanan</div>
+ <label class="opt ${S.h==='ambil'?'on':''}"><input type="radio" name="h" ${S.h==='ambil'?'checked':''} onchange="setH('ambil')"><div><b>Ambil sendiri</b><div class="mu">Di loket, saat nomor Anda siap</div></div><span>Gratis</span></label>
+ <label class="opt ${S.h==='antar'?'on':''}"><input type="radio" name="h" ${S.h==='antar'?'checked':''} onchange="setH('antar')"><div><b>Diantar pelayan</b><div class="mu">Pelayan membawa ke tempat duduk Anda</div></div><span>+${rp(FEE)}</span></label>`;
+ if(S.h==='antar')h+=`<label class="f">Ciri-ciri atau lokasi duduk<input type="text" placeholder="Contoh: baju biru, dekat pintu" value="${esc(S.loc)}" oninput="S.loc=this.value"></label>`;
+ h+=`<div class="row"><span>Subtotal</span><span>${rp(sb)}</span></div><div class="row"><span>Biaya pengantaran</span><span>${rp(fee)}</span></div><div class="row t"><span>Total</span><span>${rp(sb+fee)}</span></div>`;
+ if(S.err)h+=`<div class="err">${S.err}</div>`;
+ return h+'<button class="btn" onclick="place()">Pesan sekarang</button><div class="mu" style="margin-top:8px">Pembayaran dilakukan di kasir.</div></div>';
+}
+function ordCard(o,staff){
+ const items=o.items.map(i=>i.q+' × '+m(i.id).n).join(', ');
+ let a='';
+ if(staff){
+  const mine=o.w===S.w,other=o.w&&!mine;
+  if(o.st==='Menunggu')a=`<button class="btn s" onclick="act('${o.id}','terima')">Terima pesanan</button>`;
+  else if(other)a=`<span class="mu">Ditangani ${esc(o.w)}</span>`;
+  else if(o.st==='Diproses')a=`<button class="btn s" onclick="act('${o.id}','siap')">Tandai siap</button>`;
+  else if(o.st==='Siap diambil')a=`<button class="btn s" onclick="act('${o.id}','selesai')">${o.h==='antar'?'Sudah diantar':'Sudah diambil pelanggan'}</button>`;
+  if(o.st==='Menunggu'||(o.st==='Diproses'&&mine))a+=`<button class="btn s g" onclick="act('${o.id}','batal')">Batalkan</button>`;
+ }
+ return `<div class="card ord"><div class="top"><span class="id">${o.id}</span>${badge(o.st)}</div>
+ <div style="margin-top:6px"><b>${esc(o.name)}</b>: ${items}</div>
+ ${o.note?`<div class="mu">Catatan: ${esc(o.note)}</div>`:''}
+ <div class="mu">${hLabel(o)}${o.h==='antar'&&o.loc?' · Lokasi: '+esc(o.loc):''}${o.w?' · Pelayan: '+esc(o.w):''}</div>
+ ${a?`<div class="acts">${a}</div>`:''}</div>`;
+}
+const earned=w=>S.orders.filter(o=>o.w===w&&o.h==='antar'&&o.st==='Selesai');
+function vStaff(){
+ const act_=S.orders.filter(o=>o.st!=='Selesai'&&o.st!=='Dibatalkan'),e=earned(S.w);
+ return `<label class="f">Masuk sebagai (setiap pelayan punya akun sendiri)<select onchange="S.w=this.value;render()">${WAITERS.map(w=>`<option ${w===S.w?'selected':''}>${w}</option>`).join('')}</select></label>
+ <div class="stats"><div class="card"><b>${e.length}</b><span class="mu">Pengantaran selesai</span></div><div class="card"><b>${rp(e.reduce((a,o)=>a+o.fee,0))}</b><span class="mu">Upah pengantaran</span></div><div class="card"><b>${act_.length}</b><span class="mu">Pesanan aktif</span></div></div>
+ <h2>Antrean pesanan</h2>`+(act_.length?act_.map(o=>ordCard(o,true)).join(''):'<div class="card mu">Belum ada pesanan aktif. Buat pesanan dari tab Pelanggan.</div>');
+}
+function vAdmin(){
+ const ok=S.orders.filter(o=>o.st!=='Dibatalkan'),done=S.orders.filter(o=>o.h==='antar'&&o.st==='Selesai');
+ const rows=WAITERS.map(w=>{const e=earned(w);return `<tr><td>${w}</td><td>${e.length}</td><td>${rp(e.reduce((a,o)=>a+o.fee,0))}</td></tr>`}).join('');
+ return `<div class="stats"><div class="card"><b>${ok.length}</b><span class="mu">Pesanan masuk</span></div><div class="card"><b>${rp(ok.reduce((a,o)=>a+sub(o),0))}</b><span class="mu">Penjualan menu</span></div><div class="card"><b>${done.length}</b><span class="mu">Pengantaran selesai</span></div><div class="card"><b>${rp(done.reduce((a,o)=>a+o.fee,0))}</b><span class="mu">Total upah pelayan</span></div></div>
+ <h2>Rekap upah pengantaran per pelayan</h2><div class="card sc"><table><tr><th>Pelayan</th><th>Pengantaran</th><th>Upah</th></tr>${rows}</table></div>
+ <div class="mu" style="margin-top:6px">Upah dihitung saat pesanan diantar selesai. Pesanan batal tidak dihitung. Biaya pengantaran tercatat terpisah dari penjualan menu.</div>
+ <h2>Semua pesanan</h2>`+S.orders.slice().reverse().map(o=>ordCard(o,false)).join('');
+}
+function render(){
+ document.getElementById('nav').innerHTML=TABS.map(([k,l])=>`<button class="${S.tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('');
+ document.getElementById('v').innerHTML={cust:vCust,staff:vStaff,admin:vAdmin}[S.tab]();
+}
+init();render();
+</script>
+</body>
+</html>
